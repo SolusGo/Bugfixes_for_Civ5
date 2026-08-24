@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Mod id="4dce6c52-6fc8-4bf4-91f1-c67f47694025" version="1">
+  <Properties>
+    <Name>SolusGo's Compatibility Fixes</Name>
+    <Teaser>Conditional repairs for older Civilization V mods running with the Community Patch.</Teaser>
+    <Description>Fixes reproducible database and UnitAI faults in MC's India pack, Tar's Arabian Split, the Byzantium Civilization Pack, and related Super Civ packs.</Description>
+    <Authors>SolusGo</Authors>
+    <SpecialThanks>Community Patch Project and the original mod authors</SpecialThanks>
+    <AffectsSavedGames>1</AffectsSavedGames>
+    <MinCompatibleSaveVersion>0</MinCompatibleSaveVersion>
+    <SupportsSinglePlayer>1</SupportsSinglePlayer>
+    <SupportsMultiplayer>0</SupportsMultiplayer>
+    <SupportsHotSeat>0</SupportsHotSeat>
+    <SupportsMac>0</SupportsMac>
+    <ReloadAudioSystem>0</ReloadAudioSystem>
+    <ReloadLandmarkSystem>0</ReloadLandmarkSystem>
+    <ReloadStrategicViewSystem>0</ReloadStrategicViewSystem>
+    <ReloadUnitSystem>0</ReloadUnitSystem>
+  </Properties>
+  <Dependencies>
+    <Mod id="d1b6328c-ff44-4b0d-aad7-c657f83610cd" minversion="1" maxversion="999" title="(1) Community Patch" />
+  </Dependencies>
+  <References>
+    <Mod id="e48b73e7-1d90-4b5d-9f12-1abde6b4847b" minversion="0" maxversion="999" title="MC's India Civilization Pack" />
+    <Mod id="fe666a56-1916-4c54-9bce-81bd99f9c5f2" minversion="0" maxversion="999" title="Tar's Arabian Split" />
+    <Mod id="848efb61-413f-43f0-b935-c8c54b2dee93" minversion="0" maxversion="999" title="Byzantium Civilization Pack" />
+    <Mod id="30b22473-5a01-4e5d-b07a-e50b8973ac3e" minversion="0" maxversion="999" title="Super Civs - DC Pack" />
+    <Mod id="d9cc8399-0169-4eb8-be30-2d448ae6e068" minversion="0" maxversion="999" title="Super Civs - Marvel Pack" />
+  </References>
+  <Blocks />
+  <Files>
+    <File import="0">SQL\CompatibilityFixes.sql</File>
+  </Files>
+  <Actions>
+    <OnModActivated>
+      <UpdateDatabase>SQL\CompatibilityFixes.sql</UpdateDatabase>
+    </OnModActivated>
+  </Actions>
+  <EntryPoints />
+</Mod>

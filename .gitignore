@@ -1,0 +1,11 @@
+# ModBuddy/Visual Studio working files
+.vs/
+bin/
+obj/
+*.suo
+*.user
+*.userprefs
+
+# Python validator cache
+__pycache__/
+*.py[cod]

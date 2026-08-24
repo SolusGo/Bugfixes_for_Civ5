@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Deploy" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Default</Configuration>
+    <ProjectGuid>{D4AB0CC1-7D54-45F1-BBCD-7309B36F79B6}</ProjectGuid>
+    <Name>SolusGo's Compatibility Fixes</Name>
+    <SafeName>SolusGosCompatibilityFixes</SafeName>
+    <Guid>4dce6c52-6fc8-4bf4-91f1-c67f47694025</Guid>
+    <Teaser>Conditional repairs for older Civilization V mods running with the Community Patch.</Teaser>
+    <Description>Fixes reproducible database and UnitAI faults in MC's India pack, Tar's Arabian Split, the Byzantium Civilization Pack, and related Super Civ packs.</Description>
+    <Authors>SolusGo</Authors>
+    <SpecialThanks>Community Patch Project and the original mod authors</SpecialThanks>
+    <Homepage>https://github.com/SolusGo/TheFleshbornChorus</Homepage>
+    <AssemblyName>SolusGoCompatibilityFixes</AssemblyName>
+    <RootNamespace>SolusGoCompatibilityFixes</RootNamespace>
+    <Civ5Path>G:\SteamLibrary\steamapps\common\Sid Meier's Civilization V</Civ5Path>
+    <Civ5UserPath>C:\Users\ThatOneYi\Documents\My Games\Sid Meier's Civilization 5</Civ5UserPath>
+    <AffectsSavedGames>true</AffectsSavedGames>
+    <MinCompatibleSaveVersion>0</MinCompatibleSaveVersion>
+    <SupportsSinglePlayer>true</SupportsSinglePlayer>
+    <SupportsMultiplayer>false</SupportsMultiplayer>
+    <SupportsHotSeat>false</SupportsHotSeat>
+    <SupportsMac>false</SupportsMac>
+    <ReloadAudioSystem>false</ReloadAudioSystem>
+    <ReloadLandmarkSystem>false</ReloadLandmarkSystem>
+    <ReloadStrategicViewSystem>false</ReloadStrategicViewSystem>
+    <ReloadUnitSystem>false</ReloadUnitSystem>
+    <ModActions>
+      <Action>
+        <Set>OnModActivated</Set>
+        <Type>UpdateDatabase</Type>
+        <FileName>SQL/CompatibilityFixes.sql</FileName>
+      </Action>
+    </ModActions>
+    <ModContent />
+    <ModVersion>1</ModVersion>
+    <Stability>Beta</Stability>
+    <ModDependencies>
+      <Association>
+        <Type>Mod</Type>
+        <Name>(1) Community Patch</Name>
+        <Id>d1b6328c-ff44-4b0d-aad7-c657f83610cd</Id>
+        <MinVersion>1</MinVersion>
+        <MaxVersion>999</MaxVersion>
+      </Association>
+    </ModDependencies>
+    <ModReferences>
+      <Association><Type>Mod</Type><Name>MC's India Civilization Pack</Name><Id>e48b73e7-1d90-4b5d-9f12-1abde6b4847b</Id><MinVersion>0</MinVersion><MaxVersion>999</MaxVersion></Association>
+      <Association><Type>Mod</Type><Name>Tar's Arabian Split</Name><Id>fe666a56-1916-4c54-9bce-81bd99f9c5f2</Id><MinVersion>0</MinVersion><MaxVersion>999</MaxVersion></Association>
+      <Association><Type>Mod</Type><Name>Byzantium Civilization Pack</Name><Id>848efb61-413f-43f0-b935-c8c54b2dee93</Id><MinVersion>0</MinVersion><MaxVersion>999</MaxVersion></Association>
+      <Association><Type>Mod</Type><Name>Super Civs - DC Pack</Name><Id>30b22473-5a01-4e5d-b07a-e50b8973ac3e</Id><MinVersion>0</MinVersion><MaxVersion>999</MaxVersion></Association>
+      <Association><Type>Mod</Type><Name>Super Civs - Marvel Pack</Name><Id>d9cc8399-0169-4eb8-be30-2d448ae6e068</Id><MinVersion>0</MinVersion><MaxVersion>999</MaxVersion></Association>
+    </ModReferences>
+    <ModBlockers />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Default' ">
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Content Include="SQL\CompatibilityFixes.sql">
+      <SubType>SQL</SubType>
+      <ImportIntoVFS>False</ImportIntoVFS>
+    </Content>
+    <Content Include="README.md"><ImportIntoVFS>False</ImportIntoVFS></Content>
+    <Content Include="PATCH_NOTES.md"><ImportIntoVFS>False</ImportIntoVFS></Content>
+    <None Include="Tools\validate_compatibility.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SQL\" />
+    <Folder Include="Tools\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Firaxis\ModBuddy\Civ5Mod.targets" />
+</Project>
