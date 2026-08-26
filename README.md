@@ -21,6 +21,18 @@ Repairs three invalid `BuildingClasses` defaults exposed by Justinian's initiali
 
 These changes prevent `Justinian I Functions.lua` from dereferencing a missing default building during startup.
 
+### Super Civs — Jean Grey / Community Patch tourism crash
+
+Jean Grey's turn script originally iterates through the complete `Players` table and calls `GetInfluenceLevel` for city-states. Community Patch only permits major-civilization IDs in its tourism influence arrays, so the first city-state ID causes the fatal `ePlayer < MAX_MAJOR_CIVS` assertion in `CvCultureClasses.cpp`.
+
+The corrected source restricts the loop to living major civilizations, safely handles a missing capital, and writes explicit zeroes to unused tourism-bit buildings. Because Civ V loads the original script as a private `InGameUIAddin`, this repair cannot be injected by the SQL compatibility mod. Run the source-patch installer once:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File Tools\Install-MarvelJeanGreyFix.ps1
+```
+
+The installer recognizes the original and Local Optimized v4 folder names, verifies the known unsafe code before changing anything, and keeps `.bak-before-solusgo-jean-grey-fix` backups.
+
 ## Installation
 
 Open `SolusGoCompatibilityFixes.civ5sln` in ModBuddy and build the project, or place the built **SolusGo's Compatibility Fixes (v 1)** folder in the Civilization V `MODS` directory. Enable it alongside the Community Patch and your normal mod collection.
@@ -45,4 +57,4 @@ repair after applying the patch twice.
 
 This project is the central home for additive third-party compatibility repairs discovered while testing the Chorus. It intentionally does not edit the installed source of other mods.
 
-Some Lua faults cannot be repaired additively. In particular, Tar's Arabian Split registers a private `SerialEventUnitCreated` callback that dereferences deleted units. Civ V gives a compatibility add-on no safe way to unregister a callback owned by another Lua context. The database and Civilopedia failure from that pack is fixed here; replacing that callback would require a corrected release of the original pack.
+Some Lua faults cannot be repaired additively. Civ V gives a compatibility add-on no safe way to unregister a callback owned by another Lua context. The Jean Grey crash therefore includes an explicit source patch and installer. Tar's Arabian Split has the same architectural limitation for its private `SerialEventUnitCreated` callback; its database and Civilopedia failure is fixed here, but replacing that callback still requires a corrected release of the original pack.
