@@ -33,6 +33,20 @@ powershell -ExecutionPolicy Bypass -File Tools\Install-MarvelJeanGreyFix.ps1
 
 The installer recognizes the original and Local Optimized v4 folder names, verifies the known unsafe code before changing anything, and keeps `.bak-before-solusgo-jean-grey-fix` backups.
 
+### Super Civs — Joker runaway temporary Clowns
+
+Joker's Golden Age conversion originally checked `IsGoldenAge()` every turn. With Community Patch, that state can remain visible while the converted Anarchy is active, so the script repeatedly spawned one explosive Clown per city. Long-running saves could accumulate hundreds of temporary Clowns, causing severe turn delays and an unreadable map.
+
+The corrected script records each conversion as a persistent one-shot state, suppresses the residual Golden Age without spawning again, safely iterates unit snapshots during detonation, and prevents Amusement Parks from reducing a city below 1 Population. When an affected save next reaches Joker's turn, it retains at most one temporary explosive Clown per Joker city and silently removes only surplus Clowns carrying `PROMOTION_JOK_DEATH`; ordinary built or converted Clowns are preserved.
+
+This private `InGameUIAddin` must also be repaired at its source. Run the installer once:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File Tools\Install-DCJokerFix.ps1
+```
+
+The installer recognizes the original and Local Optimized DC v4 folders, refuses unknown source versions, updates the manifest hash, and keeps `.bak-before-solusgo-joker-fix` backups. It is safe to run again.
+
 ## Installation
 
 Open `SolusGoCompatibilityFixes.civ5sln` in ModBuddy and build the project, or place the built **SolusGo's Compatibility Fixes (v 1)** folder in the Civilization V `MODS` directory. Enable it alongside the Community Patch and your normal mod collection.
@@ -55,6 +69,6 @@ repair after applying the patch twice.
 
 ## Scope and limitations
 
-This project is the central home for additive third-party compatibility repairs discovered while testing the Chorus. It intentionally does not edit the installed source of other mods.
+This project is the central home for third-party compatibility repairs discovered while testing the Chorus. The built SQL mod remains additive and does not edit other mods; explicitly run source-patch installers are provided only where Civ V's isolated Lua contexts make an additive repair impossible.
 
-Some Lua faults cannot be repaired additively. Civ V gives a compatibility add-on no safe way to unregister a callback owned by another Lua context. The Jean Grey crash therefore includes an explicit source patch and installer. Tar's Arabian Split has the same architectural limitation for its private `SerialEventUnitCreated` callback; its database and Civilopedia failure is fixed here, but replacing that callback still requires a corrected release of the original pack.
+Some Lua faults cannot be repaired additively. Civ V gives a compatibility add-on no safe way to unregister a callback owned by another Lua context. The Jean Grey and Joker repairs therefore include explicit source patches and installers. Tar's Arabian Split has the same architectural limitation for its private `SerialEventUnitCreated` callback; its database and Civilopedia failure is fixed here, but replacing that callback still requires a corrected release of the original pack.
