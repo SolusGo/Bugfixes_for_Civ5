@@ -1,5 +1,13 @@
 # Patch Notes
 
+## 2026-08-28 — Marvel Vibranium resource-accounting repair
+
+- Added a guarded source patch for `BPA_Lua.lua` in Super Civs - Marvel Pack v4.
+- Removes captured hidden Vibranium buildings from non-Black-Panther cities.
+- Repairs stale non-building Vibranium recorded in the Community Patch tile bucket.
+- Runs on save load and player turns, allowing already-affected saves to recover.
+- Added an idempotent installer for original and Local Optimized Marvel v4 folders.
+
 ## Source patch update — 2026-08-28
 
 - Added a guarded source patch and installer for Joker's runaway Golden Age conversion. The conversion now runs once per Golden Age, recovers affected saves by removing only surplus temporary explosive Clowns, safely detonates from a unit snapshot, and cannot reduce an Amusement Park city below 1 Population.

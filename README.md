@@ -47,6 +47,20 @@ powershell -ExecutionPolicy Bypass -File Tools\Install-DCJokerFix.ps1
 
 The installer recognizes the original and Local Optimized DC v4 folders, refuses unknown source versions, updates the manifest hash, and keeps `.bak-before-solusgo-joker-fix` backups. It is safe to run again.
 
+### Super Civs — stale Vibranium after city transfer
+
+Black Panther's Vibranium is supplied by an invisible building rather than map deposits. In affected saves, transferring a Black Panther city can leave that virtual resource in the Community Patch's map-tile counter for the new owner. The Community Patch then reports a mismatch such as `Stored: 2, counted: 0` during its resource audit.
+
+The corrected Black Panther script removes captured Vibranium dummy buildings from other civilizations and repairs only their non-building Vibranium remainder. It runs once when a save opens and again at the start of each player's turn, so existing affected saves are repaired as well as future city transfers.
+
+This private `InGameUIAddin` must be repaired at its source. With Civilization V closed, run:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File Tools\Install-MarvelVibraniumFix.ps1
+```
+
+The installer recognizes both Marvel v4 folder names, refuses unknown source versions, updates the manifest hash, and keeps `.bak-before-solusgo-vibranium-fix` backups. It is safe to run again.
+
 ## Installation
 
 Open `SolusGoCompatibilityFixes.civ5sln` in ModBuddy and build the project, or place the built **SolusGo's Compatibility Fixes (v 1)** folder in the Civilization V `MODS` directory. Enable it alongside the Community Patch and your normal mod collection.
