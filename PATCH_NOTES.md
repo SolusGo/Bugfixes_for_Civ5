@@ -1,5 +1,12 @@
 # Patch Notes
 
+## 2026-10-26 — Tonga first-contact Science crash
+
+- Add the MC Polynesian pack v5 source repair for first-contact Science when no technology is selected. The award now enters normal Science overflow instead of passing `-1` to the Community Patch research API.
+- Identify the failing 30-Science call for Tonga/player 20 from three native crash dumps and the pre-crash save. Retain the original reward amounts and other first-contact bonuses.
+- Include the corrected Lua, a guarded installer with backups/checksum updates and executable regression tests. The existing installed Tonga repair is recognized without another write.
+- Keep this external compatibility repair in this fixes repository. Native replay after installing the hotfix remains pending; see [the investigation](docs/TongaResearchCrash.md).
+
 ## 2026-08-28 — Marvel Vibranium resource-accounting repair
 
 - Added a guarded source patch for `BPA_Lua.lua` in Super Civs - Marvel Pack v4.

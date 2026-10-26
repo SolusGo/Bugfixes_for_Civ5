@@ -9,3 +9,6 @@ obj/
 # Python validator cache
 __pycache__/
 *.py[cod]
+
+# Local source-patch backups and diagnostic files
+dist/

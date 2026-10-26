@@ -61,6 +61,19 @@ powershell -ExecutionPolicy Bypass -File Tools\Install-MarvelVibraniumFix.ps1
 
 The installer recognizes both Marvel v4 folder names, refuses unknown source versions, updates the manifest hash, and keeps `.bak-before-solusgo-vibranium-fix` backups. It is safe to run again.
 
+### MC's Polynesian Civilisation Pack — Tonga first-contact Science crash
+
+Tonga's first-contact Science bonus passed an invalid technology ID to the Community Patch when no research was selected, causing a fatal research-index check during turn transitions. The repaired source grants the same Science through overflow in that situation and continues to fund selected research normally.
+
+This private Lua callback follows the same source-patch workflow as the Super Civ repairs above. With Civilization V closed, inspect and apply the verified v5 repair:
+
+```powershell
+python Tools/hotfix_tonga_research.py
+python Tools/hotfix_tonga_research.py --apply
+```
+
+The installer checks the mod UUID, source hash and manifest checksum, preserves unrelated bytes, keeps backups, and recognizes an already installed repair. The corrected Lua is also included under `Source Patches/MC's Polynesian Civilisation Pack v5/`. See the [crash evidence, tests and continuation check](docs/TongaResearchCrash.md). Enabling the SQL mod alone does not patch the external Lua file.
+
 ## Installation
 
 Open `SolusGoCompatibilityFixes.civ5sln` in ModBuddy and build the project, or place the built **SolusGo's Compatibility Fixes (v 1)** folder in the Civilization V `MODS` directory. Enable it alongside the Community Patch and your normal mod collection.
